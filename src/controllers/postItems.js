@@ -1,9 +1,10 @@
 const { items } = require("../config/database");
 const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../middlewares/message");
 
-const postItem = (req, res) => {
+const postItem = (req, res, next) => {
+  console.log(req.file);
   const newItem = new items({
-    image: req.body.image,
+    image: req.file.path,
     title: req.body.title,
     description: req.body.description,
     price: req.body.price,
