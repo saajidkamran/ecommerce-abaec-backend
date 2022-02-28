@@ -1,10 +1,10 @@
 const { items } = require("../config/database");
 const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../middlewares/message");
 
-const postItem = (req, res, next) => {
-  console.log(req.file);
+const postItem = async(req, res, next) => {
+  const  fileUrl = req.file.path.replace(/\\/g, "/");
   const newItem = new items({
-    image: req.file.path,
+    image: fileUrl,
     title: req.body.title,
     description: req.body.description,
     price: req.body.price,
@@ -13,11 +13,11 @@ const postItem = (req, res, next) => {
     category: req.body.category
   });
   try {
-    newItem.save();
+   const response = await newItem.save();
     res.status(200).send({
       staus: STATUS_MESSAGES.SUCCESS,
       data: {
-        newItem
+        response
       }
     });
   } catch (error) {
