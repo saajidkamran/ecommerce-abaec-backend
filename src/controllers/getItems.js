@@ -1,4 +1,4 @@
-const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../middlewares/message");
+const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
 const { items } = require("../config/database");
 
 const allItems = async (req, res) => {

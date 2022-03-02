@@ -1,5 +1,5 @@
 const { items } = require("../config/database");
-const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../middlewares/message");
+const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
 
 const postItem = async(req, res, next) => {
   const  fileUrl = req.file.path.replace(/\\/g, "/");

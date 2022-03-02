@@ -1,12 +1,24 @@
 const { items } = require("../config/database");
+const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
 
-const del = (req, res) => {
-  items.deleteOne({ _id: req.params.id }, function (err) {
-    if (!err) {
-      res.send("Successfully deleted the corresponding item.");
-    } else {
-      res.send(err);
-    }
-  });
+const del = async(req, res) => {
+  try {
+    const response= await  items.deleteOne({ _id: req.params.id });
+    res.status(200).send({
+      staus:"Successfully deleted the corresponding item.",
+      data: {
+        response
+      }
+    });
+  } catch (error) {
+    res.status(404).send({
+      staus: STATUS_MESSAGES.FAIL,
+      data: {
+        errorMessage: ERROR_MESSAGES.RESOURCE_NOT_FOUND
+      }
+    });
+    
+  }
+ 
 };
 module.exports = del;
