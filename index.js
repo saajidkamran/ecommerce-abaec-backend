@@ -36,7 +36,11 @@ app.patch("/api/items/:id", updateItem);
 app.post("/payment/create", paymentDetail);
 app.post("/api/invoice", createInvoice);
 app.post("/api/customers", createCus);
-app.post("/api/orders", Orders);
+app.post("/api/orders", Orders);//Index page at default entry route
+app.route("/").get(function (req, res) {
+  res.send("working");
+});
+
 
 //local-port access
 app.listen(port, server);
