@@ -17,9 +17,12 @@ app.use(
 app.use(cors());
 //Rest-api - calls
 const postItem = require("./src/controllers/postItems");
+const createInvoice = require("./src/controllers/createInvoice");
 const paymentDetail = require("./src/controllers/payment");
 const deleteOnne = require("./src/controllers/deleteOne");
 const getItems = require("./src/controllers/getItems");
+const createCus = require("./src/controllers/createCus");
+const Orders = require("./src/controllers/allOrders");
 const updateItem = require("./src/controllers/UpdateItem");
 const upload = require("./src/middlewares/multerImageUpload");
 const { server, port } = require("./src/config/server");
@@ -31,6 +34,9 @@ app
 app.delete("/api/items/:id", deleteOnne);
 app.patch("/api/items/:id", updateItem);
 app.post("/payment/create", paymentDetail);
+app.post("/api/invoice", createInvoice);
+app.post("/api/customers", createCus);
+app.post("/api/orders", Orders);
 
 //local-port access
 app.listen(port, server);
