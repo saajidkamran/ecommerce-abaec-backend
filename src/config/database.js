@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 //database connection
-// mongoose.connect("mongodb://localhost:27017/ecom");
-mongoose.connect("mongodb+srv://admin-sk:0759342494@cluster0.jqida.mongodb.net/ecom");
+mongoose.connect("mongodb://localhost:27017/ecom");
+// mongoose.connect("mongodb+srv://admin-sk:0759342494@cluster0.jqida.mongodb.net/ecom");
 
 //item schema
 const itemSchema = new mongoose.Schema({
@@ -29,9 +29,22 @@ const orderSchema = new mongoose.Schema({
   orderPrice: Number,
   orderQuantity: Number
 });
+
 // model
 const items = mongoose.model("items", itemSchema);
 const customers = mongoose.model("customers", customerSchema);
 const orders = mongoose.model("orders", orderSchema);
 
-module.exports = { items, customers, orders };
+const search=items.aggregate([
+  {
+    "$search":{
+      "text":{
+        "query":"polo",
+        "path":"name"
+      }
+    }
+  }
+])
+console.log("search",search)
+
+module.exports = { itemSchema,items, customers, orders };

@@ -17,6 +17,8 @@ app.use(
 app.use(cors());
 //Rest-api - calls
 const postItem = require("./src/controllers/postItems");
+const email = require("./src/controllers/email");
+const search = require("./src/controllers/search");
 const createInvoice = require("./src/controllers/createInvoice");
 const paymentDetail = require("./src/controllers/payment");
 const deleteOnne = require("./src/controllers/deleteOne");
@@ -26,6 +28,7 @@ const Orders = require("./src/controllers/allOrders");
 const updateItem = require("./src/controllers/UpdateItem");
 const upload = require("./src/middlewares/multerImageUpload");
 const { server, port } = require("./src/config/server");
+const { response } = require("express");
 //item app-route
 app
   .route("/api/items")
@@ -36,11 +39,14 @@ app.patch("/api/items/:id", updateItem);
 app.post("/payment/create", paymentDetail);
 app.post("/api/invoice", createInvoice);
 app.post("/api/customers", createCus);
-app.post("/api/orders", Orders);//Index page at default entry route
+app.post("/api/orders", Orders);
+app.post("/api/search", search);
+app.post("/api/mail", email);
+
+//Index page at default entry route
 app.route("/").get(function (req, res) {
   res.send("working");
 });
-
 
 //local-port access
 app.listen(port, server);
