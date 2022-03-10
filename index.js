@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const bodyparser = require("body-parser");
 app.use(express.static("uploads"));
-require('dotenv').config()
+require("dotenv").config();
 const stripe = require("stripe")(
   "sk_test_51J887XGHMWtYg6xLMbLM7wErxu56jV6O4fRibDbQKOirTJY4HI0Dswln73vEFBnRb9XGTP3lPRrqxS6Wa2uqnbyy00BL7iFPf7"
 );
@@ -18,7 +18,7 @@ app.use(
 app.use(cors());
 //Rest-api - calls
 const postItem = require("./src/controllers/postItems");
-const email = require("./src/controllers/email");
+const email = require("./src/controllers/Sendemail");
 const search = require("./src/controllers/search");
 const createInvoice = require("./src/controllers/createInvoice");
 const paymentDetail = require("./src/controllers/payment");
@@ -48,6 +48,7 @@ app.post("/api/mail", email);
 app.route("/").get(function (req, res) {
   res.send("working");
 });
-
-//local-port access
-app.listen(port, server);
+-(
+  //local-port access
+  app.listen(port, server)
+);
