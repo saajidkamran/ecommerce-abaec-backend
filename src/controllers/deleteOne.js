@@ -5,7 +5,7 @@ const del = async(req, res) => {
   try {
     const response= await  items.deleteOne({ _id: req.params.id });
     res.status(200).send({
-      staus:"Successfully deleted the corresponding item.",
+      staus:"API run success",
       data: {
         response
       }
@@ -14,7 +14,7 @@ const del = async(req, res) => {
     res.status(404).send({
       staus: STATUS_MESSAGES.FAIL,
       data: {
-        errorMessage: ERROR_MESSAGES.RESOURCE_NOT_FOUND
+        errorMessage: error.message
       }
     });
     

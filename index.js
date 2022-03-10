@@ -28,6 +28,8 @@ const createCus = require("./src/controllers/createCus");
 const Orders = require("./src/controllers/allOrders");
 const updateItem = require("./src/controllers/UpdateItem");
 const upload = require("./src/middlewares/multerImageUpload");
+// const productValidation = require("./src/middlewares/productValidation");
+
 const { server, port } = require("./src/config/server");
 const { response } = require("express");
 //item app-route

@@ -1,8 +1,9 @@
 const { items } = require("../config/database");
 const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
+const productValidation = require("../middlewares/productValidation");
 
-const postItem = async(req, res, next) => {
-  const  fileUrl = req.file.path.replace(/\\/g, "/");
+const postItem = async (req, res, next) => {
+  const fileUrl = req.file.path.replace(/\\/g, "/");
   const newItem = new items({
     image: fileUrl,
     title: req.body.title,
@@ -13,7 +14,8 @@ const postItem = async(req, res, next) => {
     category: req.body.category
   });
   try {
-   const response = await newItem.save();
+    const response = await newItem.save();
+    const value = await productValidation.validateAsync(req.body);
     res.status(200).send({
       staus: STATUS_MESSAGES.SUCCESS,
       data: {
