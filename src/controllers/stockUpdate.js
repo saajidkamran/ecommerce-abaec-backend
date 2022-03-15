@@ -5,7 +5,7 @@ const update = async (req, res) => {
   try {
     const result = await items.findByIdAndUpdate(
       { _id: req.params.id },
-      { $set: req.body }
+      { $inc: { quantity: -1 } }
     );
     res.status(200).send({
       staus: STATUS_MESSAGES.SUCCESS,
@@ -16,7 +16,7 @@ const update = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).send({
-      staus: STATUS_MESSAGES.FAIL
+      staus: error.message
     });
   }
 };

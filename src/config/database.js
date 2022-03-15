@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+const passport = require("passport");
+const findOrCreate = require("mongoose-findorcreate");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 //database connection
 mongoose.connect("mongodb://localhost:27017/ecom");
@@ -19,8 +23,13 @@ const customerSchema = new mongoose.Schema({
   name: String,
   email: String,
   stripeId: String,
-  password: String
+  password: String,
+  googleId: String
 });
+// plugin for the findorcreate
+customerSchema.plugin(findOrCreate);
+customerSchema.plugin(passportLocalMongoose);
+
 //customer order Schema
 const orderSchema = new mongoose.Schema({
   cusName: String,
@@ -35,16 +44,28 @@ const items = mongoose.model("items", itemSchema);
 const customers = mongoose.model("customers", customerSchema);
 const orders = mongoose.model("orders", orderSchema);
 
-const search=items.aggregate([
+passport.use(customers.createStrategy());
+
+passport.serializeUser(function (newCustomer, done) {
+  done(null, newCustomer._id);
+});
+passport.deserializeUser(function (id, done) {
+  customers.findById(id, function (err, newCustomer) {
+    done(err, newCustomer);
+  });
+});
+
+//creating an aggregation function for search
+const search = items.aggregate([
   {
-    "$search":{
-      "text":{
-        "query":"polo",
-        "path":"name"
+    $search: {
+      text: {
+        query: "polo",
+        path: "name"
       }
     }
   }
-])
-console.log("search",search)
+]);
+console.log("search", search);
 
-module.exports = { itemSchema,items, customers, orders };
+module.exports = { itemSchema, customerSchema, items, customers, orders };

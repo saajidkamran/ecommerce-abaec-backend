@@ -3,6 +3,7 @@ const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
 const productValidation = require("../middlewares/productValidation");
 
 const postItem = async (req, res, next) => {
+  // posting products to database
   const fileUrl = req.file.path.replace(/\\/g, "/");
   const newItem = new items({
     image: fileUrl,

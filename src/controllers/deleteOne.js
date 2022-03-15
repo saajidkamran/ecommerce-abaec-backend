@@ -1,11 +1,11 @@
 const { items } = require("../config/database");
 const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
 
-const del = async(req, res) => {
+const del = async (req, res) => {
   try {
-    const response= await  items.deleteOne({ _id: req.params.id });
+    const response = await items.deleteOne({ _id: req.params.id });
     res.status(200).send({
-      staus:"API run success",
+      staus: "API run success",
       data: {
         response
       }
@@ -17,8 +17,6 @@ const del = async(req, res) => {
         errorMessage: error.message
       }
     });
-    
   }
- 
 };
 module.exports = del;

@@ -1,16 +1,18 @@
-const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
+const { STATUS_MESSAGES } = require("../config/message");
 
 const sgMail = require("@sendgrid/mail");
 const API_KEY = process.env.API_KEY;
 sgMail.setApiKey(API_KEY);
-
 const mail = async (req, res) => {
   const message = {
     to: "saajid@gapstars.net",
     from: "saajidkamran@gmail.com ",
     subject: "Payment Confirmation From ABAEC",
     html:
-      "<h3>Hello this SK from ABAEC </h3> <br></br> <p> Payment have been done successfully </p>" +"<p> RS. "+ req.body.price +"<p>"+
+      "<h3>Hello this SK from ABAEC </h3> <br></br> <p> Payment have been done successfully </p>" +
+      "<p> RS. " +
+      req.body.price +
+      "<p>" +
       "<p> Thanks for shopping with us  </p> "
   };
   try {
