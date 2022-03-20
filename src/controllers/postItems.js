@@ -1,5 +1,5 @@
 const { items } = require("../config/database");
-const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
+const { STATUS_MESSAGES } = require("../config/message");
 const productValidation = require("../middlewares/productValidation");
 
 const postItem = async (req, res, next) => {
@@ -16,7 +16,6 @@ const postItem = async (req, res, next) => {
   });
   try {
     const response = await newItem.save();
-    const value = await productValidation.validateAsync(req.body);
     res.status(200).send({
       staus: STATUS_MESSAGES.SUCCESS,
       data: {

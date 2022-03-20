@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost:27017/ecom");
 //item schema
 const itemSchema = new mongoose.Schema({
   image: String,
-  title: { type: String, required: true },
+  title: String,
   description: String,
   price: Number,
   rating: Number,
