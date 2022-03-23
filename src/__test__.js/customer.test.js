@@ -1,7 +1,8 @@
 const supertest = require("supertest");
 const app = require("../routes/approutes");
+// make sure u change the username before the test run 
 const userRegistation = {
-  username: "saajidddssfdfgapstarssd",
+  username: "saajidrrddssfdfgapstarssd",
   password: "123",
   email: "saajid@gmail.com"
 };

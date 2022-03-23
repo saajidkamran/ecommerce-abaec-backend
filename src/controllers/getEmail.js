@@ -1,23 +1,20 @@
 const { ERROR_MESSAGES, STATUS_MESSAGES } = require("../config/message");
-const { items } = require("../config/database");
-
-const search = async (req, res) => {
-  const searchQuery = req.body.title;
+const { customers } = require("../config/database");
+const getemail = async (req, res) => {
+  const cus = req.body.username;
   try {
-    const foundItems = await items.find({ title: searchQuery });
+    const foundCus = await customers.find({ username: cus });
     res.status(200).send({
       staus: STATUS_MESSAGES.SUCCESS,
-      data: {
-        foundItems
-      }
+      results: foundCus
     });
   } catch {
     res.status(404).send({
       staus: STATUS_MESSAGES.FAIL,
-      data: {
+      error: {
         errorMessage: ERROR_MESSAGES.RESOURCE_NOT_FOUND
       }
     });
   }
 };
-module.exports = search;
+module.exports = getemail;

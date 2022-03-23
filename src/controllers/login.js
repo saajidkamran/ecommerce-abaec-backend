@@ -7,20 +7,14 @@ const login = async (req, res) => {
     password: req.body.password
   });
   try {
-    await req.login(usernew, function (err) {
-      if (err) {
-        res.status(404).send({
-          staus: "fail",
-          data: err.message
+    await req.login(usernew, () => {
+      Passport.authenticate("local")(req, res, function () {
+        res.status(200).send({
+          staus: "success",
+          data: usernew.username,
+          id: usernew._id
         });
-      } else {
-        Passport.authenticate("local")(req, res, function () {
-          res.status(200).send({
-            staus: "success",
-            data: usernew.username
-          });
-        });
-      }
+      });
     });
   } catch (error) {
     res.status(404).send({

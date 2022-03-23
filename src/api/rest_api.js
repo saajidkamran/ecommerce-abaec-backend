@@ -2,6 +2,7 @@ const postItem = require("../controllers/postItems");
 const stock = require("../controllers/stockUpdate");
 const email = require("../controllers/Sendemail");
 const search = require("../controllers/search");
+const searchEmail = require("../controllers/getEmail");
 const paymentDetail = require("../controllers/payment");
 const deleteOnne = require("../controllers/deleteOne");
 const getItems = require("../controllers/getItems");
@@ -18,6 +19,7 @@ module.exports = {
   stock,
   email,
   search,
+  searchEmail,
   paymentDetail,
   deleteOnne,
   getItems,

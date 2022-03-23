@@ -4,8 +4,9 @@ const sgMail = require("@sendgrid/mail");
 const API_KEY = process.env.API_KEY;
 sgMail.setApiKey(API_KEY);
 const mail = async (req, res) => {
+  const email = req.body.Cusemail;
   const message = {
-    to: "saajid@gapstars.net",
+    to: email,
     from: "saajidkamran@gmail.com ",
     subject: "Payment Confirmation From ABAEC",
     html:

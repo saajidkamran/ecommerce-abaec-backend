@@ -34,6 +34,7 @@ const {
   stock,
   email,
   search,
+  searchEmail,
   paymentDetail,
   deleteOnne,
   getItems,
@@ -44,7 +45,7 @@ const {
   register,
   login,
   logout
-} = require("../api/rest_api")
+} = require("../api/rest_api");
 //item app-route
 app
   .route("/api/items")
@@ -56,6 +57,7 @@ app.post("/payment/create", paymentDetail);
 app.post("/api/customers", createCus);
 app.post("/api/orders", Orders);
 app.post("/api/search", search);
+app.post("/api/searchcus", searchEmail);
 app.patch("/api/stockUpdate/:id", stock);
 app.post("/api/mail", email);
 app.post("/register", register);
