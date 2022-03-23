@@ -10,7 +10,7 @@ const login = async (req, res) => {
     await req.login(usernew, () => {
       Passport.authenticate("local")(req, res, function () {
         res.status(200).send({
-          staus: "success",
+          status: "success",
           data: usernew.username,
           id: usernew._id
         });
