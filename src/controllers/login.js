@@ -21,25 +21,15 @@ const login = async (req, res) => {
             expiresIn: "1hr"
           }
         );
-        return res.status(200).send({
+         res.status(200).send({
           status: "Auth Success",
           token: token
         });
       });
     });
-    const token = jwt.sign(
-      {
-        username: usernew.username,
-        id: usernew._id,
-        email: usernew.email
-      },
-      process.env.JWT_KEY,
-      {
-        expiresIn: "1hr"
-      }
-    );
+   
   } catch (error) {
-    res.status(404).send({
+     res.status(404).send({
       staus: "fail",
       data: error.message
     });

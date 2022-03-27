@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const bodyparser = require("body-parser");
 const Passport = require("passport");
+const checkAuth = require("../middlewares/check-auth");
 const stripe = require("stripe")(
   "sk_test_51J887XGHMWtYg6xLMbLM7wErxu56jV6O4fRibDbQKOirTJY4HI0Dswln73vEFBnRb9XGTP3lPRrqxS6Wa2uqnbyy00BL7iFPf7"
 );
@@ -12,12 +13,13 @@ require("dotenv").config();
 //initializing
 app.use(express.static("uploads"));
 app.use(express.json());
-app.use(bodyparser.json());
 app.use(
   bodyparser.urlencoded({
-    extended: true
+    extended: false
   })
 );
+app.use(bodyparser.json());
+
 app.use(cookieParser());
 app.use(cors());
 app.use(
@@ -54,7 +56,12 @@ app
   .post(upload.single("productImage"), postItem)
   .get(getItems);
 app.delete("/api/items/:id", deleteOnne);
-app.patch("/api/items/:id", upload.single("productImage"), updateItem);
+app.patch(
+  "/api/items/:id",
+  checkAuth,
+  upload.single("productImage"),
+  updateItem
+);
 app.post("/payment/create", paymentDetail);
 app.post("/api/customers", createCus);
 app.post("/api/orders", Orders);
