@@ -1,5 +1,6 @@
 const Passport = require("passport");
 const { customers } = require("../config/database");
+const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   const usernew = new customers({
@@ -9,13 +10,34 @@ const login = async (req, res) => {
   try {
     await req.login(usernew, () => {
       Passport.authenticate("local")(req, res, function () {
-        res.status(200).send({
-          status: "success",
-          data: usernew.username,
-          id: usernew._id
+        const token = jwt.sign(
+          {
+            username: usernew.username,
+            id: usernew._id,
+            email: usernew.email
+          },
+          process.env.JWT_KEY,
+          {
+            expiresIn: "1hr"
+          }
+        );
+        return res.status(200).send({
+          status: "Auth Success",
+          token: token
         });
       });
     });
+    const token = jwt.sign(
+      {
+        username: usernew.username,
+        id: usernew._id,
+        email: usernew.email
+      },
+      process.env.JWT_KEY,
+      {
+        expiresIn: "1hr"
+      }
+    );
   } catch (error) {
     res.status(404).send({
       staus: "fail",
