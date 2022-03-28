@@ -21,15 +21,15 @@ const login = async (req, res) => {
             expiresIn: "1hr"
           }
         );
-         res.status(200).send({
+        res.status(200).send({
           status: "Auth Success",
+          data: usernew.username,
           token: token
         });
       });
     });
-   
   } catch (error) {
-     res.status(404).send({
+    res.status(404).send({
       staus: "fail",
       data: error.message
     });
