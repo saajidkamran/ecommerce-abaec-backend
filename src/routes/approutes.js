@@ -53,9 +53,9 @@ const {
 //item app-route
 app
   .route("/api/items")
-  .post(upload.single("productImage"), postItem)
+  .post(checkAuth, upload.single("productImage"), postItem)
   .get(getItems);
-app.delete("/api/items/:id", deleteOnne);
+app.delete("/api/items/:id",checkAuth, deleteOnne);
 app.patch(
   "/api/items/:id",
   checkAuth,
@@ -67,7 +67,7 @@ app.post("/api/customers", createCus);
 app.post("/api/orders", Orders);
 app.post("/api/search", search);
 app.post("/api/searchcus", searchEmail);
-app.patch("/api/stockUpdate/:id", stock);
+app.patch("/api/stockUpdate/:id", checkAuth, stock);
 app.post("/api/mail", email);
 app.post("/register", register);
 app.post("/login", login);

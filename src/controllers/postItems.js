@@ -14,21 +14,32 @@ const postItem = async (req, res, next) => {
     quantity: req.body.quantity,
     category: req.body.category
   });
-  try {
-    const response = await newItem.save();
-    res.status(200).send({
-      staus: STATUS_MESSAGES.SUCCESS,
-      data: {
-        response
-      }
-    });
-  } catch (error) {
-    res.status(404).send({
+  const data =req.userData
+  if(data.username===process.env.ADMIN_ID){
+    try {
+      const response = await newItem.save();
+      res.status(200).send({
+        staus: STATUS_MESSAGES.SUCCESS,
+        data: {
+          response
+        }
+      });
+    } catch (error) {
+      res.status(404).send({
+        staus: STATUS_MESSAGES.FAIL,
+        data: {
+          errorMessage: error.message
+        }
+      });
+    }
+  }else{
+    res.status(401).send({
       staus: STATUS_MESSAGES.FAIL,
       data: {
-        errorMessage: error.message
+        errorMessage: "Access denied"
       }
     });
   }
+
 };
 module.exports = postItem;
