@@ -28,7 +28,7 @@ const update = async (req, res, next) => {
           result
         }
       });
-    } catch (error) {
+    } catch (error) {s
       res.status(404).send({
         error: error.message
       });
