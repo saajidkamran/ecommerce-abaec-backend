@@ -3,6 +3,7 @@ const { items } = require("../config/database");
 
 const search = async (req, res) => {
   const searchQuery = req.body.title;
+
   try {
     const foundItems = await items.find({ title: searchQuery });
     res.status(200).send({

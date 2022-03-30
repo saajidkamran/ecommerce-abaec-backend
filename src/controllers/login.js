@@ -7,6 +7,7 @@ const login = async (req, res) => {
     username: req.body.username,
     password: req.body.password
   });
+
   try {
     await req.login(usernew, () => {
       Passport.authenticate("local")(req, res, function () {

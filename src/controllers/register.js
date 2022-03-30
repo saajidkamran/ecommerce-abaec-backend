@@ -1,5 +1,6 @@
 const { customers } = require("../config/database");
 const Passport = require("passport");
+
 const register = async (req, res) => {
   try {
     const response = await customers.register(

@@ -3,8 +3,10 @@ const { STATUS_MESSAGES } = require("../config/message");
 const sgMail = require("@sendgrid/mail");
 const API_KEY = process.env.API_KEY;
 sgMail.setApiKey(API_KEY);
+
 const mail = async (req, res) => {
   const email = req.body.Cusemail;
+
   const message = {
     to: email,
     from: "saajidkamran@gmail.com ",
@@ -16,6 +18,7 @@ const mail = async (req, res) => {
       "<p>" +
       "<p> Thanks for shopping with us  </p> "
   };
+
   try {
     const result = await sgMail.send(message);
     res.status(200).send({

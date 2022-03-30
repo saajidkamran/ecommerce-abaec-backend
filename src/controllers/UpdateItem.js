@@ -8,6 +8,7 @@ const update = async (req, res, next) => {
   if (req.file) {
     fileUrl = req.file.path.replace(/\\/g, "/");
   }
+
   if (data.username === process.env.ADMIN_ID) {
     try {
       const result = await items.findByIdAndUpdate(
@@ -28,7 +29,8 @@ const update = async (req, res, next) => {
           result
         }
       });
-    } catch (error) {s
+    } catch (error) {
+      s;
       res.status(404).send({
         error: error.message
       });

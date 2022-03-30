@@ -10,6 +10,7 @@ const stripe = require("stripe")(
   "sk_test_51J887XGHMWtYg6xLMbLM7wErxu56jV6O4fRibDbQKOirTJY4HI0Dswln73vEFBnRb9XGTP3lPRrqxS6Wa2uqnbyy00BL7iFPf7"
 );
 require("dotenv").config();
+
 //initializing
 app.use(express.static("uploads"));
 app.use(express.json());
@@ -19,7 +20,6 @@ app.use(
   })
 );
 app.use(bodyparser.json());
-
 app.use(cookieParser());
 app.use(cors());
 app.use(
@@ -50,30 +50,36 @@ const {
   login,
   logout
 } = require("../api/rest_api");
+
 //item app-route
 app
   .route("/api/items")
   .post(checkAuth, upload.single("productImage"), postItem)
   .get(getItems);
+
 app.delete("/api/items/:id", checkAuth, deleteOnne);
+
 app.patch(
   "/api/items/:id",
   checkAuth,
   upload.single("productImage"),
   updateItem
 );
-app.post("/payment/create", paymentDetail);
+
 app.post("/api/customers", createCus);
 app.post("/api/orders", Orders);
 app.post("/api/search", search);
 app.post("/api/searchcus", searchEmail);
 app.patch("/api/stockUpdate/:id", stock);
-app.post("/api/mail", email);
+app.post("/api/mail", checkAuth, email);
+app.post("/payment/create", paymentDetail);
 app.post("/register", register);
 app.post("/login", login);
 app.post("/logout", logout);
+
 //Index page at default entry route
 app.route("/").get(function (req, res) {
   res.send("working");
 });
+
 module.exports = app;

@@ -1,5 +1,4 @@
 const multer = require("multer");
-const path = require("path");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -9,6 +8,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   }
 });
+
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/jpeg" ||
@@ -20,6 +20,7 @@ const fileFilter = (req, file, cb) => {
     cb(new Error("mimetype not recoganized"), false);
   }
 };
+
 const upload = multer({
   storage: storage,
   limits: {

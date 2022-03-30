@@ -1,10 +1,10 @@
 const { items } = require("../config/database");
 const { STATUS_MESSAGES } = require("../config/message");
-const productValidation = require("../middlewares/productValidation");
 
 const postItem = async (req, res, next) => {
   // posting products to database
   const fileUrl = req.file.path.replace(/\\/g, "/");
+
   const newItem = new items({
     image: fileUrl,
     title: req.body.title,
@@ -14,8 +14,10 @@ const postItem = async (req, res, next) => {
     quantity: req.body.quantity,
     category: req.body.category
   });
-  const data =req.userData
-  if(data.username===process.env.ADMIN_ID){
+
+  const data = req.userData;
+
+  if (data.username === process.env.ADMIN_ID) {
     try {
       const response = await newItem.save();
       res.status(200).send({
@@ -32,7 +34,7 @@ const postItem = async (req, res, next) => {
         }
       });
     }
-  }else{
+  } else {
     res.status(401).send({
       staus: STATUS_MESSAGES.FAIL,
       data: {
@@ -40,6 +42,5 @@ const postItem = async (req, res, next) => {
       }
     });
   }
-
 };
 module.exports = postItem;
