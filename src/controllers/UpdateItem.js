@@ -24,20 +24,19 @@ const update = async (req, res, next) => {
         }
       );
       res.status(200).send({
-        staus: STATUS_MESSAGES.SUCCESS,
+        status: STATUS_MESSAGES.SUCCESS,
         data: {
           result
         }
       });
     } catch (error) {
-      s;
       res.status(404).send({
-        error: error.message
+        Status: "cannot update the item"
       });
     }
   } else {
     return res.status(401).send({
-      error: "Access denaied"
+      status: "Auth fail"
     });
   }
 };

@@ -8,7 +8,7 @@ const update = async (req, res) => {
       { $inc: { quantity: -1 } }
     );
     res.status(200).send({
-      staus: STATUS_MESSAGES.SUCCESS,
+      status: STATUS_MESSAGES.SUCCESS,
       data: {
         result
       }
@@ -16,7 +16,7 @@ const update = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).send({
-      staus: error.message
+      status: "cannot update the stock"
     });
   }
 };

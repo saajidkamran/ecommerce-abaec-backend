@@ -28,18 +28,15 @@ const postItem = async (req, res, next) => {
       });
     } catch (error) {
       res.status(404).send({
-        staus: STATUS_MESSAGES.FAIL,
-        data: {
+        status: STATUS_MESSAGES.FAIL,
+        Error: {
           errorMessage: error.message
         }
       });
     }
   } else {
     res.status(401).send({
-      staus: STATUS_MESSAGES.FAIL,
-      data: {
-        errorMessage: "Access denied"
-      }
+      status: "Auth fail"
     });
   }
 };

@@ -12,15 +12,15 @@ const order = async (req, res) => {
   try {
     const response = await newOrders.save();
     res.status(200).send({
-      staus: STATUS_MESSAGES.SUCCESS,
+      Status: STATUS_MESSAGES.SUCCESS,
       data: {
         response
       }
     });
   } catch (error) {
     res.status(404).send({
-      staus: STATUS_MESSAGES.FAIL,
-      data: {
+      Status: STATUS_MESSAGES.FAIL,
+      Error: {
         errorMessage: ERROR_MESSAGES
       }
     });

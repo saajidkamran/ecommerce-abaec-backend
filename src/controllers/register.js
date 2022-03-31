@@ -15,7 +15,7 @@ const register = async (req, res) => {
   } catch (error) {
     res.status(404).send({
       status: "Register fail ",
-      data: {
+      Error: {
         errorMessage: error.message
       }
     });
