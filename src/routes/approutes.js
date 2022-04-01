@@ -6,6 +6,8 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 const Passport = require("passport");
 const checkAuth = require("../middlewares/check-auth");
+const checkUser = require("../middlewares/check-user");
+
 const stripe = require("stripe")(
   "sk_test_51J887XGHMWtYg6xLMbLM7wErxu56jV6O4fRibDbQKOirTJY4HI0Dswln73vEFBnRb9XGTP3lPRrqxS6Wa2uqnbyy00BL7iFPf7"
 );
@@ -54,14 +56,15 @@ const {
 //item app-route
 app
   .route("/api/items")
-  .post(checkAuth, upload.single("productImage"), postItem)
+  .post(checkAuth, checkUser, upload.single("productImage"), postItem)
   .get(getItems);
 
-app.delete("/api/items/:id", checkAuth, deleteOnne);
+app.delete("/api/items/:id", checkAuth, checkUser, deleteOnne);
 
 app.patch(
   "/api/items/:id",
   checkAuth,
+  checkUser,
   upload.single("productImage"),
   updateItem
 );

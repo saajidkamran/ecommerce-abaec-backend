@@ -15,9 +15,9 @@ const postItem = async (req, res, next) => {
     category: req.body.category
   });
 
-  const data = req.userData;
+  const role = req.user;
 
-  if (data.username === process.env.ADMIN_ID) {
+  if (role) {
     try {
       const response = await newItem.save();
       res.status(200).send({

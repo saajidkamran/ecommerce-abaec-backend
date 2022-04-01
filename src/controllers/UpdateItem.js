@@ -2,14 +2,14 @@ const { STATUS_MESSAGES } = require("../config/message");
 const { items } = require("../config/database");
 let fileUrl;
 const update = async (req, res, next) => {
-  const data = req.userData;
+  const role = req.user;
 
   //check if file is selected
   if (req.file) {
     fileUrl = req.file.path.replace(/\\/g, "/");
   }
 
-  if (data.username === process.env.ADMIN_ID) {
+  if (role) {
     try {
       const result = await items.findByIdAndUpdate(
         { _id: req.params.id },

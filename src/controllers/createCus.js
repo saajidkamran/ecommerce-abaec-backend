@@ -20,7 +20,7 @@ const createCus = async (req, res) => {
     res.status(404).send({
       Status: STATUS_MESSAGES.FAIL,
       Error: {
-        errorMessage: ERROR_MESSAGES
+        errorMessage: error.message
       }
     });
   }

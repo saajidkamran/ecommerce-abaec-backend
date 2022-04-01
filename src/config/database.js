@@ -24,7 +24,7 @@ const customerSchema = new mongoose.Schema({
   email: String,
   stripeId: String,
   password: String,
-  googleId: String
+  role: String
 });
 // plugin for the findorcreate
 customerSchema.plugin(findOrCreate);
@@ -66,6 +66,5 @@ const search = items.aggregate([
     }
   }
 ]);
-console.log("search", search);
 
 module.exports = { itemSchema, customerSchema, items, customers, orders };
