@@ -17,7 +17,7 @@ const login = async (req, res) => {
             username: usernew.username,
             id: usernew._id,
           },
-          process.env.JWT_KEY,
+          "secret",
           {
             expiresIn: "1hr"
           }
