@@ -4,7 +4,11 @@ const Passport = require("passport");
 const register = async (req, res) => {
   try {
     const response = await customers.register(
-      { username: req.body.username, email: req.body.email },
+      {
+        username: req.body.username,
+        email: req.body.email,
+        role: req.body.role
+      },
       req.body.password
     );
     Passport.authenticate("local")(req, res, function () {
