@@ -11,13 +11,13 @@ const login = async (req, res) => {
   try {
     await req.login(usernew, () => {
       Passport.authenticate("local")(req, res, function () {
-        console.log(usernew);
+        console.log(usernew)
         const token = jwt.sign(
           {
             username: usernew.username,
-            id: usernew._id
+            id: usernew._id,
           },
-          `${process.env.JWT_KEY}`,
+          process.env.JWT_KEY,
           {
             expiresIn: "1hr"
           }
