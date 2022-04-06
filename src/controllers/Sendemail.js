@@ -29,7 +29,7 @@ const mail = async (req, res) => {
     console.log(error);
     res.status(404).send({
       status: STATUS_MESSAGES.FAIL,
-      data: error
+      data: error.message
     });
   }
 };
