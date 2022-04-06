@@ -1,7 +1,8 @@
 const { STATUS_MESSAGES } = require("../config/message");
 
 const sgMail = require("@sendgrid/mail");
-const API_KEY = `${process.env.API_KEY}`;
+const API_KEY =
+  "SG.mtj0vI4NQxKN_gSHvGQMsQ.gsJlY447MKQj9_HflRrcdO8ki52x-TX_KZ5ALMj4Z";
 sgMail.setApiKey(API_KEY);
 
 const mail = async (req, res) => {
