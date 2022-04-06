@@ -74,7 +74,7 @@ app.post("/api/orders", Orders);
 app.post("/api/search", search);
 app.post("/api/searchcus", searchEmail);
 app.patch("/api/stockUpdate/:id", stock);
-app.post("/api/mail", checkAuth, email);
+app.post("/api/mail", email);
 app.post("/payment/create", paymentDetail);
 app.post("/register", register);
 app.post("/login", login);
