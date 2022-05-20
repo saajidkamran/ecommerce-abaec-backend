@@ -25,7 +25,7 @@ const update = async (req, res, next) => {
       );
       res.status(200).send({
         status: STATUS_MESSAGES.SUCCESS,
-        data: {
+        results: {
           result
         }
       });

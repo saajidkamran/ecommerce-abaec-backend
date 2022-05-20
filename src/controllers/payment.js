@@ -5,7 +5,7 @@ const stripe = require("stripe")(
 const paymentDetail = async (request, response) => {
   //sending the total amount to stripe
   // *100 becouse it make error when page reloads reffer to documentation
-  const total = request.query.total * 100;
+  const total = request.query.total * 10;
   console.log("Payment request received", total);
 
   //initialaizing the payment
